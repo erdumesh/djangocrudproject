@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django</title>
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/custom.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center alert alert-primary">Django | CRUD App | MySql DB</h1>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    
+    <script src="{% static 'enroll/js/jQuery.js' %}"></script>
+    <script src="{% static 'enroll/js/popper.js' %}"></script>
+    <script src="{% static 'enroll/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

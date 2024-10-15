@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="row">
+        <div class="col-sm-4">
+            <h4 class="text-center alert alert-danger">Add New User Detail</h4>
+            <form action="" method="POST" >
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success" value="Add">
+        
+            </form>
+        </div>
+        <div style="height: 70vh; overflow-y: scroll;" class="col-sm-8">
+            <h4 style="position: sticky;top: 0px; height: 10px;align-items: center;display: flex;justify-content: center;" class="text-center alert alert-danger item-center">Show All User's Details</h4>
+            {% if users %}
+            <div style="position: sticky;top: 0px; " class="text-center alert alert-danger flex relative">
+                <h4 style="display: inline;float:left;" >Table Data</h4>
+                <h6 style="display: inline;float: right;">Total No. of Rows : {{users.count}}</h6>
+                <form style="display: inline;" action="{% url 'deletealldata' %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <input type="submit" value="Clear All Data and Truncate Table" class="btn btn-danger ">
+                </form>
+            </div>
+            <table class="table table-hover">
+                <tr><th>S.No.</th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Email ID</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                    
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{user.id}}</td>
+                    <td>{{user.First_Name}}</td>
+                    <td>{{user.Last_Name}}</td>
+                    <td>{{user.Phone_Number}}</td>
+                    <td>{{user.Email_ID}}</td>
+                    <td>{{user.Address}}</td>
+                    <td>
+                        <a href="{% url 'updatedata' user.id %}" class="btn btn-success" >Edit</a>
+                        <form action="{% url 'deletedata' user.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete" class="btn btn-danger ">
+                        </form>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+              </table>    
+            {% else %}
+            <h4 class="text-center alert alert-warning">No data Found</h4>
+            {% endif %}
+        </div>
+   </div>
+{% endblock content %}
